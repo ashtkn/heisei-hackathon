@@ -1,10 +1,10 @@
 <template>
-  <container>
+  <b-container>
     <div>ログイン画面です</div>
     <div>
       <b-button @click="signInAnonymously">匿名ログイン</b-button>
     </div>
-  </container>
+  </b-container>
 </template>
 
 <script>
