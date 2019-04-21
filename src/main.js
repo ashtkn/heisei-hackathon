@@ -4,7 +4,28 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import BootstrapVue from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+import firebase from 'firebase'
+
 Vue.config.productionTip = false
+
+/* Configure Bootstrap */
+Vue.use(BootstrapVue)
+
+/* Configure Firebase */
+const config = {
+  apiKey: 'AIzaSyCD6Aqza1GTj_7ohAOkKNNOCG7r3k2n_C8',
+  authDomain: 'heisei-hackathon.firebaseapp.com',
+  databaseURL: 'https://heisei-hackathon.firebaseio.com',
+  projectId: 'heisei-hackathon',
+  storageBucket: 'heisei-hackathon.appspot.com',
+  messagingSenderId: '435095458233'
+}
+
+firebase.initializeApp(config)
 
 /* eslint-disable no-new */
 new Vue({
