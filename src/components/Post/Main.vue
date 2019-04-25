@@ -17,6 +17,20 @@
       </b-form-group>
 
       <b-form-group
+        id="date"
+        label="Date"
+        label-for="date"
+        description="Put date here.">
+        <b-form-input
+          id="date"
+          v-model="form.date"
+          required
+          placeholder="Put date here."
+          type="date"
+        ></b-form-input>
+      </b-form-group>
+
+      <b-form-group
         id="description"
         label="Description"
         label-for="description"
@@ -37,10 +51,9 @@
         description="Put image here.">
         <b-form-file
           id="image"
-          v-model="form.file"
-          v-bind:state="Boolean(form.file)"
           placeholder="Choose a file..."
           drop-placeholder="Drop file here..."
+          @change="onFilePicked"
         ></b-form-file>
       </b-form-group>
 
@@ -67,30 +80,83 @@
 </template>
 
 <script>
+import firebase from 'firebase'
 export default {
   name: 'Main',
   data () {
     return {
       form: {
         title: '',
+        date: '',
         description: '',
-        file: null,
         point: '0'
       },
-      show: true
+      show: true,
+      imageName: null,
+      imageFile: null,
+      imageUrl: null
     }
   },
   methods: {
+    onFilePicked (evt) {
+      const files = evt.target.files
+      if (files[0] !== undefined) {
+        this.imageName = files[0].name
+        if (this.imageName.lastIndexOf('.') <= 0) {
+          return
+        }
+        const fr = new FileReader()
+        fr.readAsDataURL(files[0])
+        fr.addEventListener('load', () => {
+          this.imageUrl = fr.result
+          this.imageFile = files[0] // this is an image file that can be sent to server...
+        })
+      } else {
+        this.imageName = null
+        this.imageFile = null
+        this.imageUrl = null
+      }
+    },
     onSubmit (evt) {
       evt.preventDefault()
-      alert(JSON.stringify(this.form))
+      console.log(JSON.stringify(this.form))
+      if (this.imageFile !== null) {
+        const storageRef = firebase.storage().ref()
+        const imageRef = storageRef.child(`images/${this.imageName}`)
+        imageRef.put(this.imageFile).then(snapshot => {
+          snapshot.ref.getDownloadURL().then(downloadUrl => {
+            console.log(downloadUrl)
+            this.imageUrl = downloadUrl
+            const db = firebase.firestore()
+            db.collection('spaces').add({
+              title: this.form.title,
+              date: new Date(this.form.date),
+              description: this.form.description,
+              image: this.imageUrl,
+              point: Number(this.form.point)
+            }).then(() => {
+              console.log('Document successfully written!')
+            }).catch(error => {
+              console.error('Error writing document: ', error)
+            })
+          }).catch(error => {
+            console.error('Error getting download url: ', error)
+          })
+        }).catch(error => {
+          console.error('Error putting image: ', error)
+        })
+      }
     },
     onReset (evt) {
       evt.preventDefault()
       this.form.title = ''
       this.form.description = ''
+      this.form.date = ''
       this.form.point = '0'
       this.show = false
+      this.imageName = null
+      this.imageFile = null
+      this.imageUrl = null
       this.$nextTick(() => {
         this.show = true
       })
