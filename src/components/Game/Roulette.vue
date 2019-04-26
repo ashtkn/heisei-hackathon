@@ -1,117 +1,104 @@
 <template>
   <b-container>
-    <head>
-    <meta charset="UTF-8">
-    <title>ぺぺぺルーレット</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    </head>
-  <div>ルーレットのパーツ?</div>
-  <body>
-    <div id="roulette">
-      <svg
-        id="mysvg"
-        viewBox="0 0 200 120"
-        @mousemove="drag($event)"
-        @mouseup="dragStop($event)">
-        <!-- パイの切れ端 -->
-        <g v-for="(item, index) in items" v-bind:key="index">
-          <path
-            :fill="item.fill"
-            :d="item.d"
-            stroke="#d8d8d8"
-            stroke-width="0.5"
-            @mousedown="dragStart(index, $event)"
-            @mouseenter="startMouseOverPie(index)"
-            @mouseleave="finishMouseOverPie(index)"
-            />
-          <text
-            :x="item.textX"
-            :y="item.textY"
-            :class="item.textSize"
-            text-anchor="middle"
-            user-select="none"
-            dominant-baseline="central"
-            @mousedown="dragStart(index, $event)"
-            @mouseenter="startMouseOverPie(index)"
-            @mouseleave="finishMouseOverPie(index)">
-            {{item.text}}
-          </text>
-        </g>
-        <!-- ドラッグ中のパイ型 -->
+    <svg
+      id="mysvg"
+      viewBox="0 0 200 120"
+      @mousemove="drag($event)"
+      @mouseup="dragStop($event)">
+      <!-- パイの切れ端 -->
+      <g v-for="(item, index) in items" v-bind:key="index">
         <path
-          :fill="dragItem.fill"
+          :fill="item.fill"
+          :d="item.d"
           stroke="#d8d8d8"
           stroke-width="0.5"
-          opacity="0.5"
-          :d="dragItem.d"
-          />
-        <!-- 回転するフォーカス -->
-        <path
-          v-if="showFocus"
-          fill="#ffffff"
-          stroke="#d8d8d8"
-          stroke-width="0.5"
-          opacity="0.9"
-          :d="focusItem"
-          />
-        <!-- 真ん中のルーレットスイッチ -->
-        <circle
-          :cx="cx"
-          :cy="cy"
-          :r="sr"
-          :fill="fillSwitch"
-          stroke-width="0.5"
-          stroke="white"
-          @mouseup="switchRoulette"
-          @mouseenter="startMouseOverSwitch"
-          @mouseleave="finishMouseOverSwitch"
-          />
-        <!-- 現在の数値 -->
+          @mousedown="dragStart(index, $event)"
+          @mouseenter="startMouseOverPie(index)"
+          @mouseleave="finishMouseOverPie(index)"
+        />
         <text
-          v-if="showCurrent"
-          :x="cx"
-          :y="cy"
+          :x="item.textX"
+          :y="item.textY"
+          :class="item.textSize"
           text-anchor="middle"
           user-select="none"
           dominant-baseline="central"
-          @mouseup="switchRoulette"
-          @mouseenter="startMouseOverSwitch"
-          @mouseleave="finishMouseOverSwitch"
-          >
-          {{items[focusIndex].text}}
+          @mousedown="dragStart(index, $event)"
+          @mouseenter="startMouseOverPie(index)"
+          @mouseleave="finishMouseOverPie(index)">
+          {{item.text}}
         </text>
-        <!-- 確定した数字 -->
-        <text
-          v-if="showFixedNum"
-          :x="cx"
-          :y="cy"
-          class="fixedNum animated flash faster"
-          text-anchor="middle"
-          user-select="none"
-          dominant-baseline="central"
-          @mouseup="switchRoulette"
-          @mouseenter="startMouseOverSwitch"
-          @mouseleave="finishMouseOverSwitch"
-          >
-          {{items[focusIndex].text}}
-        </text>
-      </svg>
-      <!-- 数字入力 -->
-      <div style="text-align: center;">
-        <input v-model.number="number" v-if="canEdit">
-      </div>
-    </div>
-  </body>
-</b-container>
+      </g>
+      <!-- ドラッグ中のパイ型 -->
+      <path
+        :fill="dragItem.fill"
+        stroke="#d8d8d8"
+        stroke-width="0.5"
+        opacity="0.5"
+        :d="dragItem.d"
+      />
+      <!-- 回転するフォーカス -->
+      <path
+        v-if="showFocus"
+        fill="#ffffff"
+        stroke="#d8d8d8"
+        stroke-width="0.5"
+        opacity="0.9"
+        :d="focusItem"
+      />
+      <!-- 真ん中のルーレットスイッチ -->
+      <circle
+        :cx="cx"
+        :cy="cy"
+        :r="sr"
+        :fill="fillSwitch"
+        stroke-width="0.5"
+        stroke="white"
+        @mouseup="switchRoulette"
+        @mouseenter="startMouseOverSwitch"
+        @mouseleave="finishMouseOverSwitch"
+      />
+      <!-- 現在の数値 -->
+      <text
+        v-if="showCurrent"
+        :x="cx"
+        :y="cy"
+        text-anchor="middle"
+        user-select="none"
+        dominant-baseline="central"
+        @mouseup="switchRoulette"
+        @mouseenter="startMouseOverSwitch"
+        @mouseleave="finishMouseOverSwitch"
+      >
+        {{items[focusIndex].text}}
+      </text>
+      <!-- 確定した数字 -->
+      <text
+        v-if="showFixedNum"
+        :x="cx"
+        :y="cy"
+        class="fixedNum animated flash faster"
+        text-anchor="middle"
+        user-select="none"
+        dominant-baseline="central"
+        @mouseup="switchRoulette"
+        @mouseenter="startMouseOverSwitch"
+        @mouseleave="finishMouseOverSwitch"
+      >
+        {{items[focusIndex].text}}
+      </text>
+    </svg>
+  </b-container>
 </template>
 
 <script>
 export default {
-
   name: 'Roulette',
   data: function () {
-    return { cx: 100, // 円の中心座標
+    return {
+      cx: 100, // 円の中心座標
       cy: 60, // 円の中心座標
       r: 50, // 円の半径
       sr: 20, // スイッチの半径
@@ -138,7 +125,6 @@ export default {
       }
       this.numbers = numbers
     }
-
   },
   methods: {
     hsvToRgb: function (H, S, V) {
@@ -146,12 +132,24 @@ export default {
       const Hp = H / 60
       const X = C * (1 - Math.abs(Hp % 2 - 1))
       let R, G, B
-      if (Hp >= 0 && Hp < 1) { [R, G, B] = [C, X, 0] }
-      if (Hp >= 1 && Hp < 2) { [R, G, B] = [X, C, 0] }
-      if (Hp >= 2 && Hp < 3) { [R, G, B] = [0, C, X] }
-      if (Hp >= 3 && Hp < 4) { [R, G, B] = [0, X, C] }
-      if (Hp >= 4 && Hp < 5) { [R, G, B] = [X, 0, C] }
-      if (Hp >= 5 && Hp < 6) { [R, G, B] = [C, 0, X] }
+      if (Hp >= 0 && Hp < 1) {
+        [R, G, B] = [C, X, 0]
+      }
+      if (Hp >= 1 && Hp < 2) {
+        [R, G, B] = [X, C, 0]
+      }
+      if (Hp >= 2 && Hp < 3) {
+        [R, G, B] = [0, C, X]
+      }
+      if (Hp >= 3 && Hp < 4) {
+        [R, G, B] = [0, X, C]
+      }
+      if (Hp >= 4 && Hp < 5) {
+        [R, G, B] = [X, 0, C]
+      }
+      if (Hp >= 5 && Hp < 6) {
+        [R, G, B] = [C, 0, X]
+      }
 
       const m = V - C;
       [R, G, B] = [R + m, G + m, B + m]
@@ -341,7 +339,8 @@ export default {
       return this.status === 'running' || this.status === 'breaking'
     },
     canEdit: function () {
-      return this.status === 'stop'
+      // return this.status === 'stop'
+      return false
     },
     // スイッチの色
     fillSwitch: function () {
@@ -356,22 +355,28 @@ div {
   border: #d0d0d0 10px;
   font-size: 24px;
 }
+
 svg {
   user-select: none;
 }
+
 input {
   font-size: 24px;
   text-align: right;
 }
+
 .fixedNum {
   animation-iteration-count: 3
 }
+
 .size4 {
   font-size: 8px;
 }
+
 .size10 {
   font-size: 10px;
 }
+
 .size20 {
   font-size: 16px;
 }
