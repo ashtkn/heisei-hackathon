@@ -13,14 +13,21 @@ export default {
   components: {
     Roulette: Roulette
   },
+  data () {
+    return {
+      userId: null,
+      gameId: null
+    }
+  },
   created () {
     const db = firebase.firestore()
+    this.userId = firebase.auth().currentUser.uid
     // Create game data
     const uuid = require('uuid/v1')
-    const gameId = uuid()
-    db.collection('games').doc(gameId).set({
-      gameId: gameId,
-      userId: firebase.auth().currentUser.uid,
+    this.gameId = uuid()
+    db.collection('games').doc(this.gameId).set({
+      gameId: this.gameId,
+      userId: this.userId,
       gameStatus: {
         currentTurn: 0,
         currentPlayer: 0,
