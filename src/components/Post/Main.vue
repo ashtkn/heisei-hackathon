@@ -136,6 +136,7 @@ export default {
               point: Number(this.form.point)
             }).then(() => {
               console.log('Document successfully written!')
+              this.$router.push('/')
             }).catch(error => {
               console.error('Error writing document: ', error)
             })
