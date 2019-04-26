@@ -29,7 +29,7 @@ export default {
   created () {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log('Login')
+        console.log('Login: ', user)
       } else {
         console.log('Not login')
         this.$router.push({
