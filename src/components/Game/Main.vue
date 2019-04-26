@@ -1,8 +1,8 @@
 <template>
   <b-container>
     <div>ゲームのメイン画面です</div>
-    <roulette></roulette>
-    <map></map>
+    <my-roulette></my-roulette>
+    <my-map></my-map>
   </b-container>
 </template>
 
@@ -13,13 +13,13 @@ import firebase from 'firebase'
 export default {
   name: 'Game',
   components: {
-    Roulette: Roulette,
-    Map: Map
+    MyRoulette: Roulette,
+    MyMap: Map
   },
   data () {
     return {
-      userId: null,
-      gameId: null
+      userId: '',
+      gameId: ''
     }
   },
   created () {
@@ -39,11 +39,13 @@ export default {
       gamePlayers: [
         {
           name: 'Player 0',
-          point: 1000
+          currentSpace: 0,
+          currentPoint: 1000
         },
         {
           name: 'Player 1',
-          point: 1000
+          currentSpace: 0,
+          currentPoint: 1000
         }
       ]
     }).then(() => {
