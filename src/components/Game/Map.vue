@@ -1,10 +1,10 @@
 <template>
-  <div>確認画面です</div>
+  <div>ここにすごろくのマップが入ります</div>
 </template>
 
 <script>
 export default {
-  name: 'Confirm'
+  name: 'Map'
 }
 </script>
 
