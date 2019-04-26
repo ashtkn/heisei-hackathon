@@ -2,16 +2,19 @@
   <b-container>
     <div>ゲームのメイン画面です</div>
     <roulette></roulette>
+    <map></map>
   </b-container>
 </template>
 
 <script>
 import Roulette from '@/components/Game/Roulette'
+import Map from '@/components/Game/Map'
 import firebase from 'firebase'
 export default {
   name: 'Game',
   components: {
-    Roulette: Roulette
+    Roulette: Roulette,
+    Map: Map
   },
   data () {
     return {
