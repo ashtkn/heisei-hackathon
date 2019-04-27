@@ -128,12 +128,15 @@ export default {
             console.log(downloadUrl)
             this.imageUrl = downloadUrl
             const db = firebase.firestore()
+            const point = Number(this.form.point)
+            const color = (point === 0 ? null : (point < 0 ? 'rgba(255,30,60,0.7)' : 'rgba(0,120,255,0.7)'))
             db.collection('spaces').add({
               title: this.form.title,
               date: new Date(this.form.date),
               description: this.form.description,
               image: this.imageUrl,
-              point: Number(this.form.point)
+              point: point,
+              color: color
             }).then(() => {
               console.log('Document successfully written!')
               this.$router.push('/')
