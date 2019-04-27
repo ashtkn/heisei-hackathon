@@ -8,7 +8,7 @@
     <svg
      xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink"
-     width="200px" height="200px" viewBox="0 0 600 600">
+     width="250px" height="250px" viewBox="0 0 600 600">
     <defs>
     <filter filterUnits="userSpaceOnUse" id="Filter_0" x="0px" y="0px" width="519px" height="519px"  >
         <feOffset in="SourceAlpha" dx="0" dy="3" />
@@ -32,11 +32,9 @@
      d="M157.000,6.000 L357.000,6.000 C439.843,6.000 507.000,73.157 507.000,156.000 L507.000,356.000 C507.000,438.843 439.843,506.000 357.000,506.000 L157.000,506.000 C74.157,506.000 7.000,438.843 7.000,356.000 L7.000,156.000 C7.000,73.157 74.157,6.000 157.000,6.000 Z"/>
     </g>
     <path fill="url(#PSgrad_0)"
-     d="M157.000,6.000 L357.000,6.000 C439.843,6.000 507.000,73.157 507.000,156.000 L507.000,356.000 C507.000,438.843 439.843,506.000 357.000,506.000 L157.000,506.000 C74.157,506.000 7.000,438.843 7.000,356.000 L7.000,156.000 C7.000,73.157 74.157,6.000 157.000,6.000 Z"/>
+     d="M157.000,6.000 L357.000,6.000 C439.843,6.000 507.000,73.157 507.000,156.000 L507.000,356.000 C507.000,438.843 439.843,506.000 357.000,506.000 L157.000,506.000 C74.157,506.000 7.000,438.843 7.000,356.000 L7.000,156.000 C7.000,73.157 74.157,6.000 157.000,6.000 Z"></path>
 
-
-
- <foreignObject x="25" y="7%" width="450" height="500" font-size="55" >
+ <foreignObject x="25" y="10%" width="450" height="500" font-size="55" >
  <p xmlns="http://www.w3.org/1999/xhtml" style="  color:white; font-weight: bold;font-family: 'M PLUS Rounded 1c'
    ">{{spaceDate}}</p>
  </foreignObject>
@@ -58,7 +56,7 @@
 <script>
 export default {
   name: 'Space',
-  props: ['spaceRgb','spaceDate','spaceTitle','spacePoint']
+  props: ['spaceRgb', 'spaceDate', 'spaceTitle', 'spacePoint']
 }
 </script>
 
