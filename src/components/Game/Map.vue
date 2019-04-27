@@ -10,16 +10,25 @@
     v-bind:space-date="space.date"
     v-bind:space-point="space.point">
   </my-space>
+  <my-popup
+  popup-rgb='rgba(255,30,60,0.7)'
+  popup-title='#たまごっち発売'
+  popup-date='2019/03/31'
+  popup-point='-600P'
+  popup-description='朝起きたらたまごっちが死んでいた！昨晩から調子が悪かったがまさか夜の間に死んでしまうとは…'
+  ></my-popup>
 </div>
 </template>
 
 <script>
 import firebase from 'firebase'
 import Space from '@/components/Game/Space'
+import Popup from '@/components/Game/Popup'
 export default {
   name: 'Map',
   components: {
-    MySpace: Space
+    MySpace: Space,
+    MyPopup: Popup
   },
   props: {
     gameId: {
@@ -59,9 +68,4 @@ export default {
 </script>
 
 <style scoped>
-/* #map {
-  height:100%;
-  background: url("maphaikei.png");
-  background-size: cover;
-} */
 </style>
