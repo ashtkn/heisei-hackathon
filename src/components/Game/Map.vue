@@ -1,8 +1,8 @@
 <template>
   <div>
   <div>ここにすごろくのマップが入ります</div>
-  <my-space v-bind:spaceRgb="rgbPlus" v-bind:spaceTitle="spaceTitleMap" spaceDate="2003/05/07" spacePoint="+500P"></my-space>
-  <my-space v-bind:spaceRgb="rgbMinus" v-bind:spaceTitle="spaceTitleMap" spaceDate="2003/05/07" spacePoint="-500P"></my-space>
+  <my-space v-bind:spaceRgb="rgbPlus" spaceTitle="日本人初の宇宙飛行士" spaceDate="2003/05/07" spacePoint="+500P"></my-space>
+  <my-space v-bind:spaceRgb="rgbMinus"　spaceTitle="日本人初の宇宙飛行士" spaceDate="2003/05/07" spacePoint="-500P"></my-space>
 </div>
 </template>
 
@@ -17,9 +17,8 @@ export default {
   data () {
     return {
       spaces: {},
-      rgbMinus: 'rgb(255,60,40)',
-      rgbPlus: 'rgb(0,120,255)',
-      spaceTitleMap: '#平成最後のたまごっち'
+      rgbMinus: 'rgba(255,60,40,0.8)',
+      rgbPlus: 'rgba(0,120,255,0.8)',
         }
       },
   created () {
