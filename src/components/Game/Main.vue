@@ -2,8 +2,8 @@
   <b-container>
     <div>ゲームのメイン画面です</div>
     <my-side-bar v-bind:game-id="gameId"></my-side-bar>
-    <my-roulette></my-roulette>
-    <my-map></my-map>
+    <my-roulette v-bind:game-id="gameId"></my-roulette>
+    <my-map v-bind:game-id="gameId"></my-map>
   </b-container>
 </template>
 
@@ -46,7 +46,8 @@ export default {
       gameStatus: {
         currentTurn: 0,
         currentPlayer: 0,
-        currentStatus: 0
+        currentState: 0,
+        remainingSteps: 0
       }
     }).then(() => {
       console.log('Successfully written document')

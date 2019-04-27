@@ -96,6 +96,12 @@
 <script>
 export default {
   name: 'Roulette',
+  props: {
+    gameId: {
+      type: String,
+      required: true
+    }
+  },
   data: function () {
     return {
       cx: 100, // 円の中心座標

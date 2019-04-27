@@ -56,7 +56,12 @@
 <script>
 export default {
   name: 'Space',
-  props: ['spaceRgb', 'spaceDate', 'spaceTitle', 'spacePoint']
+  props: {
+    spaceRgb: String,
+    spaceDate: String,
+    spaceTitle: String,
+    spacePoint: String
+  }
 }
 </script>
 
