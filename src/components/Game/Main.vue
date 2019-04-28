@@ -54,7 +54,6 @@ export default {
       remainingSteps: 0
     }).then(() => {
       console.log('Successfully written document')
-
       // Set callback method
       const gameId = this.gameId
       db.collection('games').doc(this.gameId).onSnapshot(document => {
@@ -77,14 +76,6 @@ export default {
         } else if (state === 3) {
           // 移動が終了してマスの詳細を表示している状態
           this.currentState = 3
-          // TODO: マスを表示
-          db.collection('games').doc(gameId).update({
-            currentState: 4
-          }).then(() => {
-            console.log('Current state: 4')
-          }).catch(error => {
-            console.error(error)
-          })
         } else if (state === 4) {
           // マスの詳細を閉じてポイント計算をしてプレーヤーを変更する状態
           this.currentState = 4
