@@ -16,6 +16,7 @@
   popup-date='2019/03/31'
   popup-point='-600P'
   popup-description='朝起きたらたまごっちが死んでいた！昨晩から調子が悪かったがまさか夜の間に死んでしまうとは…'
+  popup-img='../../assets/hsm100-jpp01036777.jpg'
   ></my-popup>
 </div>
 </template>
