@@ -19,6 +19,16 @@
   v-bind:popup-img="image"
   v-on:close-popup="closePopup"
   ></my-popup>
+  <my-popup
+    popup-rgb='rgba(255,30,60,0.7)'
+    v-if="showPopup"
+    v-bind:popup-title="popupData.title"
+    v-bind:popup-date="popupData.date"
+    v-bind:popup-point="popupData.point"
+    v-bind:popup-description="popupData.description"
+    v-bind:popup-img="popupData.imageUrl"
+    v-on:close-popup="closePopup"
+  ></my-popup>
 </div>
 </template>
 
@@ -55,7 +65,15 @@ export default {
       currentState: 0,
       closeButtonEnabled: true,
       spaces: [],
-      image: require('@/assets/hsm100-jpp01036777.jpg')
+      image: require('@/assets/hsm100-jpp01036777.jpg'),
+      showPopup: false,
+      popupData: {
+        title: '',
+        date: '',
+        point: '',
+        description: '',
+        imageUrl: ''
+      }
     }
   },
   created () {
@@ -117,8 +135,27 @@ export default {
         // 移動が終了してマスの詳細を表示している状態
         // TODO: マスを表示
         this.closeButtonEnabled = true
+        this.showPopup = true
+        const currentSpaceIndex = data.currentSteps[currentPlayerIndex]
+        console.log(currentSpaceIndex)
+        const currentSpace = this.spaces[currentSpaceIndex]
+        console.log('Spaces: ', this.spaces)
+        console.log(currentSpace)
+        firebase.storage().refFromURL(currentSpace.image).getDownloadURL().then(url => {
+          console.log(url)
+          this.popupData = {
+            title: currentSpace.title,
+            description: currentSpace.description,
+            date: currentSpace.date,
+            point: currentSpace.point,
+            imageUrl: url
+          }
+        }).catch(error => {
+          console.error(error)
+        })
       } else if (state === 4) {
         // マスの詳細を閉じてポイント計算をしてプレーヤーを変更する状態
+        this.showPopup = false
         this.closeButtonEnabled = false
       } else {
         // エラー
