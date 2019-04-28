@@ -17,18 +17,24 @@ export default {
   data () {
     return {
       currentPlayerIndex: 0,
-      gamePlayers: []
+      gamePlayers: [],
+      currentPoints: [],
+      currentSteps: []
     }
   },
   computed: {
     currentPlayerName: function () {
+      if (this.gamePlayers.length === 0) {
+        return null
+      }
       return this.gamePlayers[this.currentPlayerIndex].name
     },
     gamePlayersTable: function () {
       return this.gamePlayers.map((value, index, array) => {
         return {
           player: value.name,
-          point: value.currentPoint
+          point: this.currentPoints[index],
+          steps: this.currentSteps[index]
         }
       })
     }
@@ -42,6 +48,8 @@ export default {
       console.log(source, ' data: ', data)
       this.gamePlayers = data.gamePlayers
       this.currentPlayerIndex = data.currentPlayer
+      this.currentPoints = data.currentPoints
+      this.currentSteps = data.currentSteps
     })
   }
 }

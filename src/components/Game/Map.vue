@@ -70,8 +70,8 @@ export default {
       const data = document.data()
       console.log('Document updated: ', data)
       const state = data.currentState
-      // const currentPlayerIndex = data.currentPlayer
-      // const gamePlayers = data.gamePlayers
+      const currentPlayerIndex = data.currentPlayer
+
       if (state === 0) {
         // ルーレットを回せる状態
       } else if (state === 1) {
@@ -80,7 +80,16 @@ export default {
         // ルーレットを回し終わって移動している状態
         console.log('プレーヤー移動開始')
         // TODO: 移動する処理
+        const currentSteps = data.currentSteps
+        const nextSteps = currentSteps.map((value, index, array) => {
+          if (index === currentPlayerIndex) {
+            return value + data.remainingSteps
+          } else {
+            return value
+          }
+        })
         db.collection('games').doc(gameId).update({
+          currentSteps: nextSteps,
           remainingSteps: 0,
           currentState: 3
         }).then(() => {

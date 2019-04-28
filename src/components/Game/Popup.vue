@@ -3,7 +3,7 @@
   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="900px" height="900px" viewBox="0, 0, 950, 693">
     <!-- ポップアップのパネル -->
     <foreignObject x="-15" y="0" width="980" height="693">
-      <img src="../../assets/popuprect.svg" width="980" height="693">
+      <img v-bind:src="backgroundImage" width="980" height="693">
     </foreignObject>
     <!-- ポイントの背景 -->
     <ellipse transform="translate(780 50)" rx="150" ry="75" v-bind:fill="popupRgb" stroke-width="20"></ellipse>
@@ -39,6 +39,11 @@ export default {
     popupPoint: String,
     popupDescription: String,
     popupImg: String
+  },
+  data () {
+    return {
+      backgroundImage: require('@/assets/popuprect.svg')
+    }
   }
 }
 </script>

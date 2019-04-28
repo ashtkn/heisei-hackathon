@@ -40,73 +40,72 @@ export default {
       gameId: this.gameId,
       gamePlayers: [
         {
-          name: 'Player 0',
-          currentSpace: 0,
-          currentPoint: 1000
+          name: 'Player 0'
         },
         {
-          name: 'Player 1',
-          currentSpace: 0,
-          currentPoint: 500
+          name: 'Player 1'
         }
       ],
+      currentSteps: [0, 0],
+      currentPoints: [1000, 500],
       currentTurn: 0,
       currentPlayer: 0,
       currentState: 0,
       remainingSteps: 0
     }).then(() => {
       console.log('Successfully written document')
+
+      // Set callback method
+      const gameId = this.gameId
+      db.collection('games').doc(this.gameId).onSnapshot(document => {
+        const data = document.data()
+        console.log('Document updated: ', data)
+        const state = data.currentState
+        this.currentTurn = data.currentTurn
+        this.remainingSteps = data.remainingSteps
+        if (state === 0) {
+          // ルーレットを回せる状態
+          this.currentState = 0
+          this.readyForRoulette = true
+        } else if (state === 1) {
+          // ルーレットを回している状態
+          this.currentState = 1
+        } else if (state === 2) {
+          // ルーレットを回し終わって移動している状態
+          this.currentState = 2
+          this.readyForRoulette = false
+        } else if (state === 3) {
+          // 移動が終了してマスの詳細を表示している状態
+          this.currentState = 3
+          // TODO: マスを表示
+          db.collection('games').doc(gameId).update({
+            currentState: 4
+          }).then(() => {
+            console.log('Current state: 4')
+          }).catch(error => {
+            console.error(error)
+          })
+        } else if (state === 4) {
+          // マスの詳細を閉じてポイント計算をしてプレーヤーを変更する状態
+          this.currentState = 4
+          const nextTurn = data.currentTurn + 1
+          const nextPlayer = data.currentPlayer === 0 ? 1 : 0
+          db.collection('games').doc(gameId).update({
+            currentTurn: nextTurn,
+            currentPlayer: nextPlayer,
+            currentState: 0
+          }).then(() => {
+            console.log('Going to next turn')
+          }).catch(error => {
+            console.error(error)
+          })
+        } else {
+          // エラー
+          console.error('State error: ', state)
+        }
+      })
     }).catch(error => {
       console.error(error)
-    })
-    // Set callback method
-    const gameId = this.gameId
-    db.collection('games').doc(this.gameId).onSnapshot(document => {
-      const data = document.data()
-      console.log('Document updated: ', data)
-      const state = data.currentState
-      this.currentTurn = data.currentTurn
-      this.remainingSteps = data.remainingSteps
-      if (state === 0) {
-        // ルーレットを回せる状態
-        this.currentState = 0
-        this.readyForRoulette = true
-      } else if (state === 1) {
-        // ルーレットを回している状態
-        this.currentState = 1
-      } else if (state === 2) {
-        // ルーレットを回し終わって移動している状態
-        this.currentState = 2
-        this.readyForRoulette = false
-      } else if (state === 3) {
-        // 移動が終了してマスの詳細を表示している状態
-        this.currentState = 3
-        // TODO: マスを表示
-        db.collection('games').doc(gameId).update({
-          currentState: 4
-        }).then(() => {
-          console.log('Current state: 4')
-        }).catch(error => {
-          console.error(error)
-        })
-      } else if (state === 4) {
-        // マスの詳細を閉じてポイント計算をしてプレーヤーを変更する状態
-        this.currentState = 4
-        const nextTurn = data.currentTurn + 1
-        const nextPlayer = data.currentPlayer === 0 ? 1 : 0
-        db.collection('games').doc(gameId).update({
-          currentTurn: nextTurn,
-          currentPlayer: nextPlayer,
-          currentState: 0
-        }).then(() => {
-          console.log('Going to next turn')
-        }).catch(error => {
-          console.error(error)
-        })
-      } else {
-        // エラー
-        console.error('State error: ', state)
-      }
     })
   }
 }
