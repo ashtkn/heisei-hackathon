@@ -23,9 +23,7 @@
     <foreignObject x="400" y="610" width="800" height="500" font-size="35">
       <button class="button" @click="$emit('close-popup')">CLOSE</button>
     </foreignObject>
-
   </svg>
-
 </div>
 </template>
 
