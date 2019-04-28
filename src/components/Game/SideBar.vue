@@ -3,6 +3,7 @@
     <h1>平成を振り返るすごろく</h1>
     <b-table striped hover v-bind:items="gamePlayersTable"></b-table>
     <div>GAME ID: {{ gameId }}</div>
+    <div>現在のプレーヤー: {{ currentPlayerName }}</div>
   </b-container>
 </template>
 
@@ -15,10 +16,14 @@ export default {
   },
   data () {
     return {
+      currentPlayerIndex: 0,
       gamePlayers: []
     }
   },
   computed: {
+    currentPlayerName: function () {
+      return this.gamePlayers[this.currentPlayerIndex].name
+    },
     gamePlayersTable: function () {
       return this.gamePlayers.map((value, index, array) => {
         return {
@@ -36,6 +41,7 @@ export default {
       const data = document.data()
       console.log(source, ' data: ', data)
       this.gamePlayers = data.gamePlayers
+      this.currentPlayerIndex = data.currentPlayer
     })
   }
 }
