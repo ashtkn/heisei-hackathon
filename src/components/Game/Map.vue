@@ -17,6 +17,7 @@
   popup-point='-600P'
   popup-description='朝起きたらたまごっちが死んでいた！昨晩から調子が悪かったがまさか夜の間に死んでしまうとは…'
   v-bind:popup-img="image"
+  v-on:close-popup="closePopup"
   ></my-popup>
 </div>
 </template>
@@ -37,8 +38,22 @@ export default {
       required: true
     }
   },
+  methods: {
+    closePopup: function () {
+      const db = firebase.firestore()
+      db.collection('games').doc(this.gameId).update({
+        currentState: 4
+      }).then(() => {
+        console.log('Current state: 4')
+      }).catch(error => {
+        console.error(error)
+      })
+    }
+  },
   data () {
     return {
+      currentState: 0,
+      closeButtonEnabled: true,
       spaces: [],
       image: require('@/assets/hsm100-jpp01036777.jpg')
     }
@@ -70,6 +85,7 @@ export default {
       const data = document.data()
       console.log('Document updated: ', data)
       const state = data.currentState
+      this.currentState = state
       const currentPlayerIndex = data.currentPlayer
 
       if (state === 0) {
@@ -99,8 +115,11 @@ export default {
         })
       } else if (state === 3) {
         // 移動が終了してマスの詳細を表示している状態
+        // TODO: マスを表示
+        this.closeButtonEnabled = true
       } else if (state === 4) {
         // マスの詳細を閉じてポイント計算をしてプレーヤーを変更する状態
+        this.closeButtonEnabled = false
       } else {
         // エラー
         console.error('State error: ', state)

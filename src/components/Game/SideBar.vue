@@ -30,6 +30,9 @@ export default {
       return this.gamePlayers[this.currentPlayerIndex].name
     },
     gamePlayersTable: function () {
+      if (this.gamePlayers === null) {
+        return null
+      }
       return this.gamePlayers.map((value, index, array) => {
         return {
           player: value.name,
