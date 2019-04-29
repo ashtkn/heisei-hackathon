@@ -30,14 +30,7 @@ export default {
     db.collection('games').doc(this.gameId).set({
       date: new Date(),
       gameId: this.gameId,
-      gamePlayers: [
-        {
-          name: 'Player 0'
-        },
-        {
-          name: 'Player 1'
-        }
-      ],
+      gamePlayers: ['Player 0', 'Player 1'],
       currentSteps: [0, 0],
       currentPoints: [1000, 500],
       currentTurn: 0,

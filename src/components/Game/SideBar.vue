@@ -28,7 +28,7 @@ export default {
       if (this.gamePlayers.length === 0) {
         return null
       }
-      return this.gamePlayers[this.currentPlayerIndex].name
+      return this.gamePlayers[this.currentPlayerIndex]
     },
     gamePlayersTable: function () {
       if (this.gamePlayers === null) {
@@ -36,7 +36,7 @@ export default {
       }
       return this.gamePlayers.map((value, index, array) => {
         return {
-          player: value.name,
+          player: value,
           point: this.currentPoints[index],
           steps: this.currentSteps[index]
         }
