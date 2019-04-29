@@ -48,6 +48,7 @@ export default {
     const gameId = this.gameId
     db.collection('games').doc(gameId).onSnapshot(document => {
       const data = document.data()
+      if (data === null) { return }
       this.currentTurn = data.currentTurn
       this.gamePlayers = data.gamePlayers
       this.currentPlayerIndex = data.currentPlayer
