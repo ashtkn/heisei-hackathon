@@ -46,7 +46,7 @@
 
  <foreignObject x="25" y="65%" width="450" height="500" font-size="65" >
  <p xmlns="http://www.w3.org/1999/xhtml" style="  color:white;
-   font-weight: bold; text-shadow: 5px 5px 1px #999999;font-family: 'M PLUS Rounded 1c';">{{spacePoint}}</p>
+   font-weight: bold; text-shadow: 5px 5px 1px #999999;font-family: 'M PLUS Rounded 1c';">{{spacePoint}}P</p>
  </foreignObject>
 
  <foreignObject x="40" y="150" width="200" height="200">
@@ -87,7 +87,7 @@ export default {
     spaceRgb: String,
     spaceDate: String,
     spaceTitle: String,
-    spacePoint: String
+    spacePoint: Number
   }
 }
 </script>
