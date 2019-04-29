@@ -1,7 +1,7 @@
 <template>
   <b-container id="sideBar">
     <p class="mb5"></p>
-    <h1><img src="../../assets/title_left.png" width="100px">平成を振り返るすごろく<img src="../../assets/title_right.png" width="100px"></h1>
+    <h1><img src="../../assets/title_left.png" width="150px">平成を振り返るすごろく<img src="../../assets/title_right.png" width="150px"></h1>
     <b-table id="table" striped hover v-bind:items="gamePlayersTable"></b-table>
     <h5>現在のプレーヤー:<br> {{ currentPlayerName }}</h5>
     <h5>現在のターン: {{Math.floor(currentTurn / 2) + 1}}</h5>

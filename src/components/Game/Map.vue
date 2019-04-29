@@ -2,6 +2,7 @@
 <div id="map">
   <!--<my-space v-bind:spaceRgb="rgbPlus" spaceTitle="#日本人初の宇宙飛行士" spaceDate="2003/05/07" spacePoint="+500P"></my-space>-->
   <!--<my-space v-bind:spaceRgb="rgbMinus" spaceTitle="たまごっち発売！！" spaceDate="2003/05/07" spacePoint="-500P"></my-space>-->
+  <p class="mb5"></p>
   <my-popup class="popup"
     popup-rgb='rgba(255,30,60,0.7)'
     v-if="showPopup"
@@ -194,7 +195,7 @@ export default {
   width: 928px;
   z-index: 3;
 }
-.space{
-
+.mb5{
+   margin-top: 3em;
 }
 </style>

@@ -39,7 +39,7 @@
    ">{{spaceDate}}</p>
  </foreignObject>
 
- <foreignObject x="25" y="30%" width="450" height="500" font-size="60" >
+ <foreignObject x="25" y="30%" width="450" height="500" font-size="50" >
  <p xmlns="http://www.w3.org/1999/xhtml" style="  color:white;
    font-weight: bold; font-family: 'M PLUS Rounded 1c'; vertical-align: middle">{{spaceTitle}}</p>
  </foreignObject>
