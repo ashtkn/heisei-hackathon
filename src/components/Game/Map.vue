@@ -101,7 +101,7 @@ export default {
     // ゲームデータのドキュメントリスナーをセット
     db.collection('games').doc(gameId).onSnapshot(document => {
       const data = document.data()
-      if (data === null) { return }
+      if (data === undefined || data === null) { return }
       const state = data.currentState
       const currentPlayerIndex = data.currentPlayer
       const currentSpaceIndex = data.currentSteps[currentPlayerIndex]
