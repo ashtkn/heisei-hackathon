@@ -26,7 +26,7 @@
     v-bind:popup-date="popupData.date"
     v-bind:popup-point="popupData.point"
     v-bind:popup-description="popupData.description"
-    v-bind:popup-img="popupData.imageUrl"
+    v-bind:popup-img="popupData.image"
     v-on:close-popup="closePopup"
   ></my-popup>
 </div>
@@ -58,38 +58,39 @@ export default {
       }).catch(error => {
         console.error(error)
       })
+    },
+    dateToString: function (rawDate) {
+      const year = rawDate.getFullYear()
+      const month = ('00' + (rawDate.getMonth() + 1)).slice(-2)
+      const day = ('00' + rawDate.getDate()).slice(-2)
+      return `${year}/${month}/${day}`
     }
   },
   data () {
     return {
-      currentState: 0,
       spaces: [],
-      // image: require('@/assets/hsm100-jpp01036777.jpg'),
       showPopup: false,
       popupData: {
         title: '',
         date: '',
         point: 0,
         description: '',
-        imageUrl: ''
+        image: ''
       }
     }
   },
   created () {
+    const gameId = this.gameId
     const db = firebase.firestore()
+    // マスのデータを取得
     db.collection('spaces').orderBy('date', 'asc').limit(50).get().then(querySnapshot => {
       querySnapshot.forEach(document => {
         const data = document.data()
-        const rawDate = data.date.toDate()
-        const year = rawDate.getFullYear()
-        const month = ('00' + (rawDate.getMonth() + 1)).slice(-2)
-        const day = ('00' + rawDate.getDate()).slice(-2)
-        const point = data.point
         this.spaces.push({
           title: `#${data.title}`,
           description: data.description,
-          date: `${year}/${month}/${day}`,
-          point: point,
+          date: this.dateToString(data.date.toDate()),
+          point: data.point,
           image: data.image,
           color: data.color
         })
@@ -97,14 +98,15 @@ export default {
     }).catch(error => {
       console.error(error)
     })
-    const gameId = this.gameId
+    // ゲームデータのドキュメントリスナーをセット
     db.collection('games').doc(gameId).onSnapshot(document => {
       const data = document.data()
+      if (data === undefined || data === null) { return }
       const state = data.currentState
-      this.currentState = state
       const currentPlayerIndex = data.currentPlayer
       const currentSpaceIndex = data.currentSteps[currentPlayerIndex]
       const currentSpace = this.spaces[currentSpaceIndex]
+      // 状態に応じた処理をする
       if (state === 0) {
         // ルーレットを回せる状態
       } else if (state === 1) {
@@ -112,13 +114,21 @@ export default {
       } else if (state === 2) {
         // ルーレットを回し終わって移動している状態
         const currentSteps = data.currentSteps
+        const currentPlayerCurrentSteps = currentSteps[currentPlayerIndex]
+        let remainingSteps = data.remainingSteps
+        // ゴールしたかどうかの判定
+        if (currentPlayerCurrentSteps + remainingSteps >= this.spaces.length) {
+          console.log('ゴールしました')
+          remainingSteps = (this.spaces.length - 1) - currentPlayerCurrentSteps
+        }
         const nextSteps = currentSteps.map((value, index, array) => {
           if (index === currentPlayerIndex) {
-            return value + data.remainingSteps
+            return value + remainingSteps
           } else {
             return value
           }
         })
+        // 状態のアップデート
         db.collection('games').doc(gameId).update({
           currentSteps: nextSteps,
           remainingSteps: 0,
@@ -131,14 +141,14 @@ export default {
       } else if (state === 3) {
         // 移動が終了してマスの詳細を表示している状態
         this.showPopup = true
+        // イメージのURLを取得
         firebase.storage().refFromURL(currentSpace.image).getDownloadURL().then(url => {
-          console.log(url)
           this.popupData = {
             title: currentSpace.title,
             description: currentSpace.description,
             date: currentSpace.date,
             point: currentSpace.point,
-            imageUrl: url
+            image: url
           }
         }).catch(error => {
           console.error(error)
@@ -155,7 +165,9 @@ export default {
           }
         })
         const nextTurn = data.currentTurn + 1
+        // TODO: 変更
         const nextPlayer = data.currentPlayer === 0 ? 1 : 0
+        // 状態のアップデート
         db.collection('games').doc(gameId).update({
           currentPoints: nextPoints,
           currentTurn: nextTurn,
@@ -167,7 +179,6 @@ export default {
           console.error(error)
         })
       } else {
-        // エラー
         console.error('State error: ', state)
       }
     })
