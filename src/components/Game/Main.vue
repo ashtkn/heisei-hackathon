@@ -1,20 +1,14 @@
 <template>
-  <b-container class="container-fluid" id="container">
-    <!-- <div>ゲームのメイン画面です</div>
-    <div>現在の状態: {{currentState}}</div>
-    <div>現在のターン: {{currentTurn}}</div>
-    <div>残りステップ数: {{remainingSteps}}</div> -->
+  <b-container fluid id="mainContainer">
     <my-side-bar v-bind:game-id="gameId" class="sideBar"></my-side-bar>
-    <div class="container">
-  <div class="row">
-    <div class="col-sm">
-      <my-roulette v-bind:game-id="gameId" class="roulette"></my-roulette>
-    </div>
-    <div class="col-6">
-      <my-map v-bind:game-id="gameId"></my-map>
+    <div class="row">
+      <div class="col-sm">
+        <my-roulette v-bind:game-id="gameId" class="roulette"></my-roulette>
       </div>
-  </div>
-</div>
+      <div class="col-6">
+        <my-map v-bind:game-id="gameId"></my-map>
+      </div>
+    </div>
   </b-container>
 </template>
 
@@ -23,7 +17,8 @@ import SideBar from '@/components/Game/SideBar'
 import Roulette from '@/components/Game/Roulette'
 import Map from '@/components/Game/Map'
 import firebase from 'firebase'
-import { uuid } from 'vue-uuid'
+import {uuid} from 'vue-uuid'
+
 export default {
   name: 'Game',
   props: {
@@ -74,23 +69,23 @@ export default {
 </script>
 
 <style scoped>
-.roulette{
+.roulette {
   position: -webkit-sticky; /* safari対応 */
   position: sticky;
-  top: 500px;/* 上端から10pxのところで固定 */
+  top: 500px; /* 上端から10pxのところで固定 */
   width: 500px;
   z-index: 1;
 }
 
-.sideBar{
+.sideBar {
   background: #fff;
   position: -webkit-sticky; /* safari対応 */
   position: sticky;
-  top: 0px;/* 上端から10pxのところで固定 */
+  top: 0px; /* 上端から10pxのところで固定 */
   z-index: 2;
 }
-#container{
-  width: 200%;
+#mainContainer {
+  /*width: 200%;*/
   background: #f7f7f7 url("../../assets/maphaikei.png") center top/cover no-repeat;
 }
 </style>
