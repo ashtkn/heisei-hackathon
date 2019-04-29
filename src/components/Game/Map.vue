@@ -13,13 +13,20 @@
     v-bind:popup-img="popupData.image"
     v-on:close-popup="closePopup"
   ></my-popup>
+
+  <a></a>
   <my-space class="space"
     v-for="(space, index) in spaces"
+    v-bind:id="['space' + index]"
     v-bind:key="index"
+    v-bind:index="index"
+    v-bind:currentSteps3="currentSteps3"
+    v-bind:currentSteps4="currentSteps4"
     v-bind:space-rgb="space.color"
     v-bind:space-title="space.title"
     v-bind:space-date="space.date"
-    v-bind:space-point="space.point">
+    v-bind:space-point="space.point"
+    >
   </my-space>
   <!--<my-popup-->
   <!--popup-rgb='rgba(255,30,60,0.7)'-->
@@ -34,6 +41,9 @@
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
+import vueSmoothScroll from 'vue-smooth-scroll'
+// Vue.use(vueSmoothScroll)
 import firebase from 'firebase'
 import Space from '@/components/Game/Space'
 import Popup from '@/components/Game/Popup'
@@ -71,6 +81,8 @@ export default {
     return {
       spaces: [],
       showPopup: false,
+      currentSteps3: 0,
+      currentSteps4: 0,
       popupData: {
         title: '',
         date: '',
@@ -130,6 +142,12 @@ export default {
           }
         })
         // 状態のアップデート
+        // if (this.spaces[index] <= currentPlayerCurrentSteps){
+        //   showplayer3: true
+        // } else{
+        //   showplayer3: false
+        // }
+
         db.collection('games').doc(gameId).update({
           currentSteps: nextSteps,
           remainingSteps: 0,
@@ -139,6 +157,13 @@ export default {
         }).catch(error => {
           console.error(error)
         })
+        if (currentPlayerIndex === 0) {
+          this.currentSteps3 = nextSteps[0]
+          console.log('3の今のマスは' + nextSteps[0])
+        } else if (currentPlayerIndex === 1) {
+          this.currentSteps4 = nextSteps[1]
+          console.log('4の今のマスは' + nextSteps[1])
+        }
       } else if (state === 3) {
         // 移動が終了してマスの詳細を表示している状態
         this.showPopup = true
