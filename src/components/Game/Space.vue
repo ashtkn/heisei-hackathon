@@ -49,13 +49,40 @@
    font-weight: bold; text-shadow: 5px 5px 1px #999999;font-family: 'M PLUS Rounded 1c';">{{spacePoint}}</p>
  </foreignObject>
 
+ <foreignObject x="40" y="150" width="200" height="200">
+   <my-player1></my-player1>
+ </foreignObject>
+
+ <foreignObject x="260" y="150" width="200" height="200">
+   <my-player2></my-player2>
+ </foreignObject>
+
+ <foreignObject x="40" y="330" width="200" height="200">
+   <my-player3></my-player3>
+ </foreignObject>
+
+ <foreignObject x="260" y="330" width="200" height="200">
+   <my-player4></my-player4>
+ </foreignObject>
+
 </svg>
+
   </div>
 </template>
 
 <script>
+import Player1 from '@/components/Game/Player1'
+import Player2 from '@/components/Game/Player2'
+import Player3 from '@/components/Game/Player3'
+import Player4 from '@/components/Game/Player4'
 export default {
   name: 'Space',
+  components: {
+    myPlayer1: Player1,
+    myPlayer2: Player2,
+    myPlayer3: Player3,
+    myPlayer4: Player4
+  },
   props: {
     spaceRgb: String,
     spaceDate: String,
