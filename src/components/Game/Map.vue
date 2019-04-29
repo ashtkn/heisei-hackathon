@@ -195,6 +195,6 @@ export default {
   z-index: 3;
 }
 .space{
-  
+
 }
 </style>
