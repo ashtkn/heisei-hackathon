@@ -112,9 +112,16 @@ export default {
       } else if (state === 2) {
         // ルーレットを回し終わって移動している状態
         const currentSteps = data.currentSteps
+        const currentPlayerCurrentSteps = currentSteps[currentPlayerIndex]
+        let remainingSteps = data.remainingSteps
+        // ゴールしたかどうかの判定
+        if (currentPlayerCurrentSteps + remainingSteps >= this.spaces.length) {
+          console.log('ゴールしました')
+          remainingSteps = (this.spaces.length - 1) - currentPlayerCurrentSteps
+        }
         const nextSteps = currentSteps.map((value, index, array) => {
           if (index === currentPlayerIndex) {
-            return value + data.remainingSteps
+            return value + remainingSteps
           } else {
             return value
           }
