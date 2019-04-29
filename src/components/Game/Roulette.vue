@@ -90,7 +90,6 @@
         {{items[focusIndex].text}}
       </text>
     </svg>
-    <div v-if="readyToStart">プレーヤーX のターンです！</div>
   </b-container>
 </template>
 
@@ -101,10 +100,6 @@ export default {
   props: {
     gameId: {
       type: String,
-      required: true
-    },
-    isEnabled: {
-      type: Boolean,
       required: true
     }
   },
@@ -126,8 +121,7 @@ export default {
       status: 'stop', // stop / running / breaking / pause
       vSwitch: 0.84, // スイッチの色の濃さ
       highlightPieIndex: -1, // ハイライトされたパイのインデックス
-      jitterBase: [-3, -2, -1, 0, 1, 2, 3],
-      readyToStart: this.isEnabled
+      jitterBase: [-3, -2, -1, 0, 1, 2, 3]
     }
   },
   watch: {
@@ -225,10 +219,6 @@ export default {
     },
     switchRoulette: function (event) {
       // ルーレット停止または一時停止
-      if (!this.readyToStart) {
-        console.log('Roulette is not enabled.')
-        return
-      }
       if (this.status === 'stop' || this.status === 'pause') {
         // ルーレット開始
         this.interval = 50

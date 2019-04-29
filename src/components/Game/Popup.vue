@@ -12,7 +12,7 @@
     <!-- タイトル -->
     <text x="459" y="170" font-size="50px" font-weight="bold" text-anchor="middle" style="font-family: 'M PLUS Rounded 1c';">{{popupTitle}}</text>
     <!-- ポイント -->
-    <text x="777" y="73" font-size="60px" font-weight="bold" text-anchor="middle" fill="white" style="text-shadow:5px 5px 1px #999999; font-family: 'M PLUS Rounded 1c';">{{popupPoint}}</text>
+    <text x="777" y="73" font-size="60px" font-weight="bold" text-anchor="middle" fill="white" style="text-shadow:5px 5px 1px #999999; font-family: 'M PLUS Rounded 1c';">{{popupPoint}}P</text>
     <!-- 画像 -->
     <image v-bind:xlink:href="popupImg" preserveAspectRatio="xMidYMid" x="0" y="190" width="918" height="300" />
     <!-- 説明 -->
@@ -34,7 +34,7 @@ export default {
     popupRgb: String,
     popupDate: String,
     popupTitle: String,
-    popupPoint: String,
+    popupPoint: Number,
     popupDescription: String,
     popupImg: String
   },

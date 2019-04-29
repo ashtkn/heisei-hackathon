@@ -10,15 +10,15 @@
     v-bind:space-date="space.date"
     v-bind:space-point="space.point">
   </my-space>
-  <my-popup
-  popup-rgb='rgba(255,30,60,0.7)'
-  popup-title='#たまごっち発売'
-  popup-date='2019/03/31'
-  popup-point='-600P'
-  popup-description='朝起きたらたまごっちが死んでいた！昨晩から調子が悪かったがまさか夜の間に死んでしまうとは…'
-  v-bind:popup-img="image"
-  v-on:close-popup="closePopup"
-  ></my-popup>
+  <!--<my-popup-->
+  <!--popup-rgb='rgba(255,30,60,0.7)'-->
+  <!--popup-title='#たまごっち発売'-->
+  <!--popup-date='2019/03/31'-->
+  <!--popup-point='-600P'-->
+  <!--popup-description='朝起きたらたまごっちが死んでいた！昨晩から調子が悪かったがまさか夜の間に死んでしまうとは…'-->
+  <!--v-bind:popup-img="image"-->
+  <!--v-on:close-popup="closePopup"-->
+  <!--&gt;</my-popup>-->
   <my-popup
     popup-rgb='rgba(255,30,60,0.7)'
     v-if="showPopup"
@@ -64,12 +64,12 @@ export default {
     return {
       currentState: 0,
       spaces: [],
-      image: require('@/assets/hsm100-jpp01036777.jpg'),
+      // image: require('@/assets/hsm100-jpp01036777.jpg'),
       showPopup: false,
       popupData: {
         title: '',
         date: '',
-        point: '',
+        point: 0,
         description: '',
         imageUrl: ''
       }
@@ -89,7 +89,7 @@ export default {
           title: `#${data.title}`,
           description: data.description,
           date: `${year}/${month}/${day}`,
-          point: `${point}P`,
+          point: point,
           image: data.image,
           color: data.color
         })
@@ -100,19 +100,17 @@ export default {
     const gameId = this.gameId
     db.collection('games').doc(gameId).onSnapshot(document => {
       const data = document.data()
-      console.log('Document updated: ', data)
       const state = data.currentState
       this.currentState = state
       const currentPlayerIndex = data.currentPlayer
-
+      const currentSpaceIndex = data.currentSteps[currentPlayerIndex]
+      const currentSpace = this.spaces[currentSpaceIndex]
       if (state === 0) {
         // ルーレットを回せる状態
       } else if (state === 1) {
         // ルーレットを回している状態
       } else if (state === 2) {
         // ルーレットを回し終わって移動している状態
-        console.log('プレーヤー移動開始')
-        // TODO: 移動する処理
         const currentSteps = data.currentSteps
         const nextSteps = currentSteps.map((value, index, array) => {
           if (index === currentPlayerIndex) {
@@ -133,11 +131,6 @@ export default {
       } else if (state === 3) {
         // 移動が終了してマスの詳細を表示している状態
         this.showPopup = true
-        const currentSpaceIndex = data.currentSteps[currentPlayerIndex]
-        console.log(currentSpaceIndex)
-        const currentSpace = this.spaces[currentSpaceIndex]
-        console.log('Spaces: ', this.spaces)
-        console.log(currentSpace)
         firebase.storage().refFromURL(currentSpace.image).getDownloadURL().then(url => {
           console.log(url)
           this.popupData = {
@@ -153,6 +146,26 @@ export default {
       } else if (state === 4) {
         // マスの詳細を閉じてポイント計算をしてプレーヤーを変更する状態
         this.showPopup = false
+        const currentPoints = data.currentPoints
+        const nextPoints = currentPoints.map((value, index, array) => {
+          if (index === currentPlayerIndex) {
+            return value + currentSpace.point
+          } else {
+            return value
+          }
+        })
+        const nextTurn = data.currentTurn + 1
+        const nextPlayer = data.currentPlayer === 0 ? 1 : 0
+        db.collection('games').doc(gameId).update({
+          currentPoints: nextPoints,
+          currentTurn: nextTurn,
+          currentPlayer: nextPlayer,
+          currentState: 0
+        }).then(() => {
+          console.log('Going to next turn')
+        }).catch(error => {
+          console.error(error)
+        })
       } else {
         // エラー
         console.error('State error: ', state)
