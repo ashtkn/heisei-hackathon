@@ -63,7 +63,6 @@ export default {
   data () {
     return {
       currentState: 0,
-      closeButtonEnabled: true,
       spaces: [],
       image: require('@/assets/hsm100-jpp01036777.jpg'),
       showPopup: false,
@@ -133,8 +132,6 @@ export default {
         })
       } else if (state === 3) {
         // 移動が終了してマスの詳細を表示している状態
-        // TODO: マスを表示
-        this.closeButtonEnabled = true
         this.showPopup = true
         const currentSpaceIndex = data.currentSteps[currentPlayerIndex]
         console.log(currentSpaceIndex)
@@ -156,7 +153,6 @@ export default {
       } else if (state === 4) {
         // マスの詳細を閉じてポイント計算をしてプレーヤーを変更する状態
         this.showPopup = false
-        this.closeButtonEnabled = false
       } else {
         // エラー
         console.error('State error: ', state)
