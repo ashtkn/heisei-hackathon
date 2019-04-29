@@ -1,9 +1,11 @@
 <template>
-  <b-container>
-    <h1>平成を振り返るすごろく</h1>
-    <b-table striped hover v-bind:items="gamePlayersTable"></b-table>
-    <h5>現在のプレーヤー: {{ currentPlayerName }}</h5>
+  <b-container id="sideBar">
+    <p class="mb5"></p>
+    <h1><img src="../../assets/title_left.png" width="150px">平成を振り返るすごろく<img src="../../assets/title_right.png" width="150px"></h1>
+    <b-table id="table" striped hover v-bind:items="gamePlayersTable"></b-table>
+    <h5>現在のプレーヤー:<br> {{ currentPlayerName }}</h5>
     <h5>現在のターン: {{Math.floor(currentTurn / 2) + 1}}</h5>
+    <p class="mb5"></p>
   </b-container>
 </template>
 
@@ -60,5 +62,24 @@ export default {
 </script>
 
 <style scoped>
+#sideBar{
+  padding: 0px 0px 100px 0px;
+}
+
+h1{
+  font-size: 45px;
+}
+
+h5{
+  font-size: 35px;
+}
+
+#table{
+  font-size: 35px;
+}
+
+.mb5{
+   margin-top: 3em;
+}
 
 </style>

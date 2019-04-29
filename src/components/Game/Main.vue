@@ -1,8 +1,15 @@
 <template>
-  <b-container>
-    <my-side-bar v-bind:game-id="gameId"></my-side-bar>
-    <my-roulette v-bind:game-id="gameId"></my-roulette>
-    <my-map v-bind:game-id="gameId"></my-map>
+  <b-container fluid id="mainContainer">
+    <div class="row">
+      <div class="col-4">
+        <my-side-bar v-bind:game-id="gameId" class="sideBar"></my-side-bar>
+        <my-roulette v-bind:game-id="gameId" class="roulette"></my-roulette>
+        </div>
+
+      <div class="col-6">
+        <my-map id="map" v-bind:game-id="gameId"></my-map>
+      </div>
+    </div>
   </b-container>
 </template>
 
@@ -11,7 +18,8 @@ import SideBar from '@/components/Game/SideBar'
 import Roulette from '@/components/Game/Roulette'
 import Map from '@/components/Game/Map'
 import firebase from 'firebase'
-import { uuid } from 'vue-uuid'
+import {uuid} from 'vue-uuid'
+
 export default {
   name: 'Game',
   props: {
@@ -62,5 +70,27 @@ export default {
 </script>
 
 <style scoped>
+.roulette {
+  /* background-color: rgba(230,230,230,0.6); */
+  position: -webkit-sticky;
+  position: sticky;
+  top: 850px;
+  width: 928px;
+  z-index: 3;
+}
 
+.sideBar {
+  background-color: rgba(230,230,230,0.6);
+  position: -webkit-sticky;
+  position: sticky;
+  top: 50px;
+  z-index: 2;
+  margin-top: 50px;
+}
+#mainContainer {
+  background: #f7f7f7 url("../../assets/maphaikei.png") center top/cover no-repeat;
+}
+
+#map{
+}
 </style>

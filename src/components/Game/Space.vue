@@ -8,7 +8,7 @@
     <svg
      xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink"
-     width="250px" height="250px" viewBox="0 0 600 600">
+     width="400px" height="400px" viewBox="0 0 600 600">
     <defs>
     <filter filterUnits="userSpaceOnUse" id="Filter_0" x="0px" y="0px" width="519px" height="519px"  >
         <feOffset in="SourceAlpha" dx="0" dy="3" />
@@ -39,7 +39,7 @@
    ">{{spaceDate}}</p>
  </foreignObject>
 
- <foreignObject x="25" y="30%" width="450" height="500" font-size="60" >
+ <foreignObject x="25" y="30%" width="450" height="500" font-size="50" >
  <p xmlns="http://www.w3.org/1999/xhtml" style="  color:white;
    font-weight: bold; font-family: 'M PLUS Rounded 1c'; vertical-align: middle">{{spaceTitle}}</p>
  </foreignObject>
@@ -49,13 +49,40 @@
    font-weight: bold; text-shadow: 5px 5px 1px #999999;font-family: 'M PLUS Rounded 1c';">{{spacePoint}}P</p>
  </foreignObject>
 
+ <foreignObject x="40" y="150" width="200" height="200">
+   <my-player1></my-player1>
+ </foreignObject>
+
+ <foreignObject x="260" y="150" width="200" height="200">
+   <my-player2></my-player2>
+ </foreignObject>
+
+ <foreignObject x="40" y="330" width="200" height="200">
+   <my-player3></my-player3>
+ </foreignObject>
+
+ <foreignObject x="260" y="330" width="200" height="200">
+   <my-player4></my-player4>
+ </foreignObject>
+
 </svg>
+
   </div>
 </template>
 
 <script>
+import Player1 from '@/components/Game/Player1'
+import Player2 from '@/components/Game/Player2'
+import Player3 from '@/components/Game/Player3'
+import Player4 from '@/components/Game/Player4'
 export default {
   name: 'Space',
+  components: {
+    myPlayer1: Player1,
+    myPlayer2: Player2,
+    myPlayer3: Player3,
+    myPlayer4: Player4
+  },
   props: {
     spaceRgb: String,
     spaceDate: String,
