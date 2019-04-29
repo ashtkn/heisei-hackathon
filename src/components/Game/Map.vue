@@ -2,7 +2,17 @@
 <div id="map">
   <!--<my-space v-bind:spaceRgb="rgbPlus" spaceTitle="#日本人初の宇宙飛行士" spaceDate="2003/05/07" spacePoint="+500P"></my-space>-->
   <!--<my-space v-bind:spaceRgb="rgbMinus" spaceTitle="たまごっち発売！！" spaceDate="2003/05/07" spacePoint="-500P"></my-space>-->
-  <my-space
+  <my-popup class="popup"
+    popup-rgb='rgba(255,30,60,0.7)'
+    v-if="showPopup"
+    v-bind:popup-title="popupData.title"
+    v-bind:popup-date="popupData.date"
+    v-bind:popup-point="popupData.point"
+    v-bind:popup-description="popupData.description"
+    v-bind:popup-img="popupData.image"
+    v-on:close-popup="closePopup"
+  ></my-popup>
+  <my-space class="space"
     v-for="(space, index) in spaces"
     v-bind:key="index"
     v-bind:space-rgb="space.color"
@@ -19,16 +29,6 @@
   <!--v-bind:popup-img="image"-->
   <!--v-on:close-popup="closePopup"-->
   <!--&gt;</my-popup>-->
-  <my-popup
-    popup-rgb='rgba(255,30,60,0.7)'
-    v-if="showPopup"
-    v-bind:popup-title="popupData.title"
-    v-bind:popup-date="popupData.date"
-    v-bind:popup-point="popupData.point"
-    v-bind:popup-description="popupData.description"
-    v-bind:popup-img="popupData.image"
-    v-on:close-popup="closePopup"
-  ></my-popup>
 </div>
 </template>
 
@@ -187,4 +187,14 @@ export default {
 </script>
 
 <style scoped>
+.popup{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  width: 928px;
+  z-index: 3;
+}
+.space{
+  
+}
 </style>

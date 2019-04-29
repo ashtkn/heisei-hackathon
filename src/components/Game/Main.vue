@@ -1,12 +1,13 @@
 <template>
   <b-container fluid id="mainContainer">
-    <my-side-bar v-bind:game-id="gameId" class="sideBar"></my-side-bar>
     <div class="row">
-      <div class="col-sm">
+      <div class="col-4">
+        <my-side-bar v-bind:game-id="gameId" class="sideBar"></my-side-bar>
         <my-roulette v-bind:game-id="gameId" class="roulette"></my-roulette>
-      </div>
+        </div>
+
       <div class="col-6">
-        <my-map v-bind:game-id="gameId"></my-map>
+        <my-map id="map" v-bind:game-id="gameId"></my-map>
       </div>
     </div>
   </b-container>
@@ -70,22 +71,26 @@ export default {
 
 <style scoped>
 .roulette {
-  position: -webkit-sticky; /* safari対応 */
+  /* background-color: rgba(230,230,230,0.6); */
+  position: -webkit-sticky;
   position: sticky;
-  top: 500px; /* 上端から10pxのところで固定 */
-  width: 500px;
-  z-index: 1;
+  top: 850px;
+  width: 928px;
+  z-index: 3;
 }
 
 .sideBar {
-  background: #fff;
-  position: -webkit-sticky; /* safari対応 */
+  background-color: rgba(230,230,230,0.6);
+  position: -webkit-sticky;
   position: sticky;
-  top: 0px; /* 上端から10pxのところで固定 */
+  top: 50px;
   z-index: 2;
+  margin-top: 50px;
 }
 #mainContainer {
-  /*width: 200%;*/
   background: #f7f7f7 url("../../assets/maphaikei.png") center top/cover no-repeat;
+}
+
+#map{
 }
 </style>

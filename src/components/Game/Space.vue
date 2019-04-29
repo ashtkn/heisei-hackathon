@@ -8,7 +8,7 @@
     <svg
      xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink"
-     width="250px" height="250px" viewBox="0 0 600 600">
+     width="400px" height="400px" viewBox="0 0 600 600">
     <defs>
     <filter filterUnits="userSpaceOnUse" id="Filter_0" x="0px" y="0px" width="519px" height="519px"  >
         <feOffset in="SourceAlpha" dx="0" dy="3" />
