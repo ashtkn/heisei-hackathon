@@ -14,6 +14,9 @@ import firebase from 'firebase'
 import { uuid } from 'vue-uuid'
 export default {
   name: 'Game',
+  props: {
+    gamePlayers: Array
+  },
   components: {
     MySideBar: SideBar,
     MyRoulette: Roulette,
@@ -26,20 +29,25 @@ export default {
   },
   created () {
     this.gameId = uuid.v1()
+    let gamePlayers = []
+    if (this.gamePlayers === undefined || this.gamePlayers === null) {
+      gamePlayers = ['名無しさん@お腹いっぱい 0', '名無しさん@お腹いっぱい 1']
+    } else {
+      gamePlayers = this.gamePlayers
+    }
+    const initialSteps = gamePlayers.map((value, index, array) => {
+      return 0
+    })
+    const initialPoints = gamePlayers.map((value, index, array) => {
+      return 1000
+    })
     const db = firebase.firestore()
     db.collection('games').doc(this.gameId).set({
       date: new Date(),
       gameId: this.gameId,
-      gamePlayers: [
-        {
-          name: 'Player 0'
-        },
-        {
-          name: 'Player 1'
-        }
-      ],
-      currentSteps: [0, 0],
-      currentPoints: [1000, 500],
+      gamePlayers: gamePlayers,
+      currentSteps: initialSteps,
+      currentPoints: initialPoints,
       currentTurn: 0,
       currentPlayer: 0,
       currentState: 0,
