@@ -13,8 +13,9 @@
     v-bind:popup-img="popupData.image"
     v-on:close-popup="closePopup"
   ></my-popup>
-
-  <a></a>
+  <button class="button">
+  <a v-bind:href="currentPlayerCurrentStepsId" v-smooth-scroll class="scrollButton">Ready to Start</a>
+  </button>
   <my-space class="space"
     v-for="(space, index) in spaces"
     v-bind:id="['space' + index]"
@@ -30,6 +31,7 @@
     v-bind:space-point="space.point"
     >
   </my-space>
+
   <!--<my-popup-->
   <!--popup-rgb='rgba(255,30,60,0.7)'-->
   <!--popup-title='#たまごっち発売'-->
@@ -87,6 +89,7 @@ export default {
       currentSteps1: 0,
       currentSteps2: 0,
       currentSteps3: 0,
+      currentPlayerCurrentStepsId: '#step0',
       popupData: {
         title: '',
         date: '',
@@ -125,6 +128,7 @@ export default {
       const currentSpace = this.spaces[currentSpaceIndex]
       // 状態に応じた処理をする
       if (state === 0) {
+        this.currentPlayerCurrentStepsId = '#space' + data.currentSteps[data.currentPlayer]
         // ルーレットを回せる状態
       } else if (state === 1) {
         // ルーレットを回している状態
@@ -237,5 +241,35 @@ export default {
 .mb5{
    margin-top: 3em;
 }
+.button {
+  position: -webkit-sticky;
+  position: sticky;
+  margin-left: -160%;
+  top: 50%;
+  width: 20%;
+  height: 30%;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: bold;
+  color: blue;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+.button:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 2px 2px rgba(0, 0, 255, 0.4);
+  color: #fff;
+}
+
+/* .scrollButton{
+  color: orange;
+} */
 
 </style>
