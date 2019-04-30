@@ -20,8 +20,10 @@
     v-bind:id="['space' + index]"
     v-bind:key="index"
     v-bind:index="index"
+    v-bind:currentSteps0="currentSteps0"
+    v-bind:currentSteps1="currentSteps1"
+    v-bind:currentSteps2="currentSteps2"
     v-bind:currentSteps3="currentSteps3"
-    v-bind:currentSteps4="currentSteps4"
     v-bind:space-rgb="space.color"
     v-bind:space-title="space.title"
     v-bind:space-date="space.date"
@@ -81,8 +83,10 @@ export default {
     return {
       spaces: [],
       showPopup: false,
+      currentSteps0: 0,
+      currentSteps1: 0,
+      currentSteps2: 0,
       currentSteps3: 0,
-      currentSteps4: 0,
       popupData: {
         title: '',
         date: '',
@@ -158,11 +162,17 @@ export default {
           console.error(error)
         })
         if (currentPlayerIndex === 0) {
-          this.currentSteps3 = nextSteps[0]
-          console.log('3の今のマスは' + nextSteps[0])
+          this.currentSteps0 = nextSteps[0]
+          console.log('0の今のマスは' + nextSteps[0] + 1)
         } else if (currentPlayerIndex === 1) {
-          this.currentSteps4 = nextSteps[1]
-          console.log('4の今のマスは' + nextSteps[1])
+          this.currentSteps1 = nextSteps[1]
+          console.log('1の今のマスは' + nextSteps[1] + 1)
+        } else if (currentPlayerIndex === 2) {
+          this.currentSteps2 = nextSteps[2]
+          console.log('2の今のマスは' + nextSteps[2] + 1)
+        } else if (currentPlayerIndex === 3) {
+          this.currentSteps3 = nextSteps[3]
+          console.log('3の今のマスは' + nextSteps[3] + 1)
         }
       } else if (state === 3) {
         // 移動が終了してマスの詳細を表示している状態
@@ -219,8 +229,9 @@ export default {
 .popup{
   position: -webkit-sticky;
   position: sticky;
-  top: 0px;
-  width: 928px;
+  top: 50%;
+  transform: translate(0%, -50%);
+  width: 100%;
   z-index: 3;
 }
 .mb5{

@@ -1,10 +1,10 @@
 <template>
   <b-container id="sideBar">
     <!--<p class="mb5"></p>-->
-    <h3><img src="../../assets/title_left.png" width="20%">平成を振り返るすごろく<img src="../../assets/title_right.png" width="20%"></h3>
+    <h3><img src="../../assets/title_left.png" width="10%">平成を振り返るすごろく<img src="../../assets/title_right.png" width="10%"></h3>
     <b-table id="table" striped hover v-bind:items="gamePlayersTable"></b-table>
     <h5>現在のプレーヤー:<br> {{ currentPlayerName }}</h5>
-    <h5>現在のターン: {{Math.floor(currentTurn / 2) + 1}}</h5>
+    <h5>現在のターン: {{Math.floor(currentTurn / 4) + 1}}</h5>
     <p class="mb5"></p>
   </b-container>
 </template>
@@ -66,8 +66,8 @@ export default {
   /*padding: 0px 0px 100px 0px;*/
 }
 
-h1{
-  /*font-size: 45px;*/
+h3{
+  font-size: 2rem;
 }
 
 h5{
@@ -75,7 +75,7 @@ h5{
 }
 
 #table{
-  /*font-size: 35px;*/
+  font-size: 1.5rem;
 }
 
 .mb5{

@@ -1,11 +1,11 @@
 <template>
   <b-container fluid id="mainContainer">
     <b-row>
-      <b-col>
+      <b-col cols="4" class="side">
         <my-side-bar v-bind:game-id="gameId" class="sideBar"></my-side-bar>
         <my-roulette v-bind:game-id="gameId" class="roulette"></my-roulette>
       </b-col>
-      <b-col>
+      <b-col cols="7">
         <my-map id="map" v-bind:game-id="gameId"></my-map>
       </b-col>
     </b-row>
@@ -75,32 +75,24 @@ export default {
   position: -webkit-sticky;
   position: sticky;
   top: 60%;
-<<<<<<< HEAD
   width: 100%;
-=======
-  width: 928px;
->>>>>>> master
   z-index: 3;
-  margin-left: -8%;
 }
 
 .sideBar {
   /* background-color: rgba(230,230,230,0.6); */
   position: -webkit-sticky;
   position: sticky;
-<<<<<<< HEAD
-  width: 80%;
-=======
   top: 5%;
->>>>>>> master
+  width: 100%;
   z-index: 2;
   margin-top: 2rem;
 }
 
-#side{
+.side{
   background-color: rgba(230,230,230,0.6);
-  margin-left: 1%;
-
+  margin-left: 0%;
+  /* width: 20%; */
 }
 
 #mainContainer {
