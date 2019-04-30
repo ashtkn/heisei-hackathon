@@ -1,7 +1,7 @@
 <template>
   <b-container fluid class="toukou">
     <h1>登録画面</h1>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+    <b-form @submit="onSubmit" @reset="onReset" v-if="show" class="form">
 
       <b-form-group
         id="title"
@@ -172,5 +172,11 @@ export default {
 <style scoped>
 .toukou{
   background: #f7f7f7 url("../../assets/maphaikei_toukou.png") center top/cover no-repeat;
+}
+
+.form{
+  width: 50%;
+  margin-left: 50%;
+  transform: translate(-50%, 0%);
 }
 </style>

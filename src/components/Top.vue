@@ -1,5 +1,6 @@
 <template>
   <b-container fluid id="mainContainer">
+    <h1><img src="../assets/平_成.png"> Retrospection Game</h1>
     <b-container class="p-4">
       <b-form @submit="start">
         <b-form-group

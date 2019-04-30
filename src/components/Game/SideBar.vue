@@ -1,11 +1,11 @@
 <template>
   <b-container id="sideBar">
     <!--<p class="mb5"></p>-->
-    <h3><img src="../../assets/title_left.png" width="10%">平成を振り返るすごろく<img src="../../assets/title_right.png" width="10%"></h3>
+    <h3><img src="../../assets/平_成.png"> Retrospection Game<img src="../../assets/title_right.png" width="10%"><img src="../../assets/title_left.png" width="10%"></h3>
     <b-table id="table" striped hover v-bind:items="gamePlayersTable"></b-table>
-    <h5>現在のプレーヤー:<br> {{ currentPlayerName }}</h5>
+    <h5>現在のプレーヤー:<img v-bind:src="icons[currentPlayerIndex]" width="4%">{{ currentPlayerName }}</h5>
     <h5>現在のターン: {{Math.floor(currentTurn / 4) + 1}}</h5>
-    <b-button to="/">トップに戻る</b-button>
+    <!-- <b-button to="/">トップに戻る</b-button> -->
     <p class="mb5"></p>
   </b-container>
 </template>
@@ -23,7 +23,13 @@ export default {
       currentPlayerIndex: 0,
       gamePlayers: [],
       currentPoints: [],
-      currentSteps: []
+      currentSteps: [],
+      icons: [
+        require('@/assets/player1.svg'),
+        require('@/assets/player2.svg'),
+        require('@/assets/player3.svg'),
+        require('@/assets/player4.svg')
+      ]
     }
   },
   computed: {
@@ -39,6 +45,7 @@ export default {
       }
       return this.gamePlayers.map((value, index, array) => {
         return {
+          // current: index === this.currentPlayerIndex ? '●' : '',
           player: value,
           point: this.currentPoints[index],
           steps: this.currentSteps[index]
