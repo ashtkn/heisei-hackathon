@@ -5,6 +5,7 @@
     <b-table id="table" striped hover v-bind:items="gamePlayersTable"></b-table>
     <h5>現在のプレーヤー:<br> {{ currentPlayerName }}</h5>
     <h5>現在のターン: {{Math.floor(currentTurn / 2) + 1}}</h5>
+    <b-button to="/">トップに戻る</b-button>
     <p class="mb5"></p>
   </b-container>
 </template>
