@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container fluid id="mainContainer">
     <b-container class="p-4">
       <b-form @submit="start">
         <b-form-group
@@ -107,5 +107,7 @@ export default {
 </script>
 
 <style scoped>
-
+#mainContainer {
+  background: #f7f7f7 url("../assets/maphaikei_top.png") center top/cover no-repeat;
+}
 </style>

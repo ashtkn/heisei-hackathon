@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container fluid class="toukou">
     <h1>登録画面</h1>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
 
@@ -170,5 +170,7 @@ export default {
 </script>
 
 <style scoped>
-
+.toukou{
+  background: #f7f7f7 url("../../assets/maphaikei_toukou.png") center top/cover no-repeat;
+}
 </style>

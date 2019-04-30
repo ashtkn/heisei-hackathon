@@ -1,6 +1,6 @@
 <template>
 <div>
-  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1400px" height="1400px" viewBox="0, 0, 950, 693">
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0, 0, 950, 693">
     <!-- ポップアップのパネル -->
     <foreignObject x="-50" y="0" width="980" height="693">
       <img v-bind:src="backgroundImage" width="980" height="693">

@@ -6,7 +6,7 @@
     <link href="https://fonts.googleapis.com/earlyaccess/kokoro.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
   </head>
-  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400px" height="400px" viewBox="0 0 600 600">
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30%" height="30%" viewBox="0 0 600 600">
     <defs>
       <filter filterUnits="userSpaceOnUse" id="Filter_0" x="0px" y="0px" width="519px" height="519px">
         <feOffset in="SourceAlpha" dx="0" dy="3" />
@@ -47,19 +47,19 @@
    font-weight: bold; text-shadow: 5px 5px 1px #999999;font-family: 'M PLUS Rounded 1c';">{{spacePoint}}P</p>
     </foreignObject>
 
-    <!-- <foreignObject x="40" y="150" width="200" height="200">
+    <foreignObject x="10%" y="20%" width="200" height="200" v-if="index <= currentSteps0">
    <my-player1></my-player1>
  </foreignObject>
 
- <foreignObject x="260" y="150" width="200" height="200">
+ <foreignObject x="40%" y="20%" width="200" height="200" v-if="index <= currentSteps1">
    <my-player2></my-player2>
- </foreignObject> -->
+ </foreignObject>
 
-    <foreignObject x="40" y="200" width="200" height="200" v-if="index <= currentSteps3">
+    <foreignObject x="10%" y="50%" width="200" height="200" v-if="index <= currentSteps2">
       <my-player3></my-player3>
     </foreignObject>
 
-    <foreignObject x="260" y="200" width="200" height="200" v-if="index <= currentSteps4">
+    <foreignObject x="40%" y="50%" width="200" height="200" v-if="index <= currentSteps3">
       <my-player4></my-player4>
     </foreignObject>
 
@@ -82,17 +82,11 @@ export default {
     myPlayer4: Player4
   },
   props: {
-    showplayer3: {
-      type: Boolean,
-      default: false
-    },
-    showplayer4: {
-      type: Boolean,
-      default: true
-    },
     index: Number,
+    currentSteps0: Number,
+    currentSteps1: Number,
+    currentSteps2: Number,
     currentSteps3: Number,
-    currentSteps4: Number,
 
     spaceRgb: String,
     spaceDate: String,
