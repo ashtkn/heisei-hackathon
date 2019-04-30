@@ -1,15 +1,14 @@
 <template>
   <b-container fluid id="mainContainer">
-    <div class="row">
-      <div class="col-4">
+    <b-row>
+      <b-col>
         <my-side-bar v-bind:game-id="gameId" class="sideBar"></my-side-bar>
         <my-roulette v-bind:game-id="gameId" class="roulette"></my-roulette>
-        </div>
-
-      <div class="col-6">
+      </b-col>
+      <b-col>
         <my-map id="map" v-bind:game-id="gameId"></my-map>
-      </div>
-    </div>
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 
@@ -75,8 +74,8 @@ export default {
   /* background-color: rgba(230,230,230,0.6); */
   position: -webkit-sticky;
   position: sticky;
-  top: 850px;
-  width: 928px;
+  top: 60%;
+  width: 100%;
   z-index: 3;
 }
 
@@ -84,9 +83,9 @@ export default {
   background-color: rgba(230,230,230,0.6);
   position: -webkit-sticky;
   position: sticky;
-  top: 50px;
+  width: 80%;
   z-index: 2;
-  margin-top: 50px;
+  margin-top: 2rem;
 }
 #mainContainer {
   background: #f7f7f7 url("../../assets/maphaikei.png") center top/cover no-repeat;
