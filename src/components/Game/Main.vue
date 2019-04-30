@@ -38,8 +38,9 @@ export default {
   created () {
     this.gameId = uuid.v1()
     let gamePlayers = []
+    console.log(this.gamePlayers)
     if (this.gamePlayers === undefined || this.gamePlayers === null) {
-      gamePlayers = ['名無しさん@お腹いっぱい 0', '名無しさん@お腹いっぱい 1']
+      gamePlayers = ['名無し 0', '名無し 1', '名無し 2', '名無し 3']
     } else {
       gamePlayers = this.gamePlayers
     }
