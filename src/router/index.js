@@ -17,7 +17,8 @@ export default new Router({
     {
       path: '/game',
       name: 'Game',
-      component: Game
+      component: Game,
+      props: true
     },
     {
       path: '/post',
