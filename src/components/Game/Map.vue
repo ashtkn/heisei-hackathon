@@ -192,7 +192,10 @@ export default {
         })
         const nextTurn = data.currentTurn + 1
         // TODO: 変更
-        const nextPlayer = data.currentPlayer === 0 ? 1 : 0
+        let nextPlayer = data.currentPlayer + 1
+        if (nextPlayer === 4) {
+          nextPlayer = 0
+        }
         // 状態のアップデート
         db.collection('games').doc(gameId).update({
           currentPoints: nextPoints,
@@ -223,4 +226,5 @@ export default {
 .mb5{
    margin-top: 3em;
 }
+
 </style>

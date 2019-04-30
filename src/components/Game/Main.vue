@@ -75,20 +75,39 @@ export default {
   position: -webkit-sticky;
   position: sticky;
   top: 60%;
+<<<<<<< HEAD
   width: 100%;
+=======
+  width: 928px;
+>>>>>>> master
   z-index: 3;
+  margin-left: -8%;
 }
 
 .sideBar {
-  background-color: rgba(230,230,230,0.6);
+  /* background-color: rgba(230,230,230,0.6); */
   position: -webkit-sticky;
   position: sticky;
+<<<<<<< HEAD
   width: 80%;
+=======
+  top: 5%;
+>>>>>>> master
   z-index: 2;
   margin-top: 2rem;
 }
+
+#side{
+  background-color: rgba(230,230,230,0.6);
+  margin-left: 1%;
+
+}
+
 #mainContainer {
+
   background: #f7f7f7 url("../../assets/maphaikei.png") center top/cover no-repeat;
+  margin: 0em;
+  padding: 0em;
 }
 
 #map{
