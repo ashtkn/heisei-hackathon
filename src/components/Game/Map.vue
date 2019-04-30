@@ -71,10 +71,10 @@ export default {
       })
     },
     dateToString: function (rawDate) {
-      const year = rawDate.getFullYear()
+      const year = rawDate.getFullYear() - 1988
       const month = ('00' + (rawDate.getMonth() + 1)).slice(-2)
       const day = ('00' + rawDate.getDate()).slice(-2)
-      return `${year}/${month}/${day}`
+      return `H.${year}/${month}/${day}`
     }
   },
   data () {
