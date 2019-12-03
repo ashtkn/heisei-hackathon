@@ -1,21 +1,30 @@
-# heisei-hackathon
+# HEISEI NO ASHIATO
 
-> A Vue.js project
+## 概要
+株式会社サイバーエージェントにおいて開催された平成最後のハッカソンに出場しました．
+「平成生まれの私たちが，平成を楽しく振り返ることができるサービス/モノ」というテーマのもと，平成のできごとを人生ゲームのように振り返るゲームをチームで開発しました．
 
-## Build Setup
+ユーザーが自分の平成の思い出を投稿することでマスが追加されるという仕様で，プレイヤーである「足跡」がマスを進んでいくことで平成を振り返る軌跡が出来上がるというコンセプトのゲームとなっています．
 
-``` bash
-# install dependencies
-npm install
+すごろくのマスには平成時代の出来事に応じたポイントが設定されているので，ポイントを集めながらゴールを目指しましょう！
 
-# serve with hot reload at localhost:8080
-npm run dev
+## 遊び方
 
-# build for production with minification
-npm run build
+* ルーレットを回転させてすごろくゲームをすることができます．
+* 平成時代の出来事がすごろくのマスになっています．
+* すごろくのマスは平成元年から平成31年まで年代順に並んでいて，ゲームを通じて平成時代を振り返ることができます．
+* すごろくのマスはユーザーが新しく投稿することができ，投稿すると自動で全てのユーザーのマスが増えます．
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
+## 実装
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+フロントエンドフレームワークにはVue.jsを採用しました．
+バックエンドにはFirebaseで実装しました．
+
+## スクリーンショット
+
+クリックで動画を再生できます！
+
+[![HEISEI NO ASHIATO](https://user-images.githubusercontent.com/24489109/70035780-e10bb380-15f6-11ea-87cf-7ba55da39709.png)](http://www.youtube.com/watch?v=nDs3hQ6yt30)
+
+## コントリビューター
+* [Yuya Munekata](https://github.com/Aries1A)
