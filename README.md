@@ -1,21 +1,11 @@
-# heisei-hackathon
+# HEISEI NO ASHIATO
 
-> A Vue.js project
+## 概要
+株式会社サイバーエージェントにおいて開催された平成最後のハッカソンに出場しました．
+「平成生まれの私たちが，平成を楽しく振り返ることができるサービス/モノ」というテーマのもと，平成のできごとを人生ゲームのように振り返るゲームをチームで開発しました．
 
-## Build Setup
+We joined 平成最後のハッカソン (the last hackathon in the Heisei era) held by CyberAgent, Inc. Following the theme, developing a service or stuff where we can happily remember the events in the Heisei era, we created a sugoroku game where we could recall these events.
 
-``` bash
-# install dependencies
-npm install
+## 動画
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+[![HEISEI NO ASHIATO](http://img.youtube.com/vi/nDs3hQ6yt30/0.jpg)](http://www.youtube.com/watch?v=nDs3hQ6yt30)
