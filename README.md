@@ -25,3 +25,6 @@
 クリックで動画を再生できます！
 
 [![HEISEI NO ASHIATO](https://user-images.githubusercontent.com/24489109/70035780-e10bb380-15f6-11ea-87cf-7ba55da39709.png)](http://www.youtube.com/watch?v=nDs3hQ6yt30)
+
+## コントリビューター
+* [Yuya Munekata](https://github.com/Aries1A)
